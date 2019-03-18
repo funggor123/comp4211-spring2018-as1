@@ -4,6 +4,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import GridSearchCV
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 import dataloader
 
 
@@ -12,6 +13,7 @@ def find_best_num_of_hidden_units(X, Y):
     scores = []
     max_scores = 0
     max_h = 1
+
     for i in range(1, 11):
         '''
         Find the best learning rate first
@@ -30,9 +32,9 @@ def find_best_num_of_hidden_units(X, Y):
         if score > max_scores:
             max_h = i
             max_scores = score
-    print("The best number of hidden units used is ", max_h)
-    print("--------------------------------------------------")
-    return MLPClassifier(hidden_layer_sizes=(max_h,), tol=0.000000001)
+        print("The best number of hidden units used is ", max_h)
+        print("--------------------------------------------------")
+        return MLPClassifier(hidden_layer_sizes=(max_h,), tol=0.000000001)
 
 
 def data_set_by_neural_network(table_trainX, table_trainY, table_testX, table_testY):
@@ -41,23 +43,36 @@ def data_set_by_neural_network(table_trainX, table_trainY, table_testX, table_te
         Training avoid over fitting
     '''
     print("--- Training ---")
-    iterations = [200, 500, 1000, 1500, 2000, 2500, 3000]
+    iterations = [200, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000]
     best_test_set_accuracy = 0
     training_set_accruacy = 0
+    best_iteration = 0
     for i in iterations:
         mlp_classifier.max_iter = i
         mlp_classifier.fit(table_trainX, table_trainY)
         ac_train = accuracy_score(mlp_classifier.predict(table_trainX), table_trainY)
         ac_test = accuracy_score(mlp_classifier.predict(table_testX), table_testY)
-        print("Accuracy of training set with iterations: ", i, ac_train)
-        print("Accuracy of test set with iterations: ", i, ac_test)
         if ac_test > best_test_set_accuracy:
             training_set_accruacy = ac_train
             best_test_set_accuracy = ac_test
+            best_iteration = i
 
+    print("Number of iterations before overfit", best_iteration)
     '''
         Results and Visualize
     '''
+    mlp_classifier.max_iter = best_iteration
+    mlp_classifier.fit(table_trainX, table_trainY)
+    ac_train = accuracy_score(mlp_classifier.predict(table_trainX), table_trainY)
+    ac_test = accuracy_score(mlp_classifier.predict(table_testX), table_testY)
+    print("Accuracy of training set with iterations: ", ac_train)
+    print("Accuracy of test set with iterations: ", ac_test)
+
+    plt.xlabel('Loss')
+    plt.ylabel('Iterations')
+    plt.plot(mlp_classifier.loss_curve_)
+    plt.plot(mlp_classifier.validation_scores_)
+    plt.show()
 
     print("Accuracy of training set : ", training_set_accruacy)
     print("Accuracy of test set : ", best_test_set_accuracy)

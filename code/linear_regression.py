@@ -2,7 +2,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import dataloader
 import matplotlib.pyplot as plt
-
+import time
 
 def train(X, Y):
     reg = LinearRegression().fit(X, Y)
@@ -34,6 +34,7 @@ def data_set_by_linear_regression(table_trainX, table_trainY, table_testX, table
     plt.show()
 
 
+start_time = time.time()
 print("*********Linear Regression**********")
 fifa_dataset, finance_dataset, orbits_dataset = dataloader.load_data()
 print("----------------fifa----------------")
@@ -48,3 +49,6 @@ print("-----------------orbits-------------")
 train_x, test_x, c_train_y, c_test_y, _, _ = dataloader.dataset_to_table(orbits_dataset)
 data_set_by_linear_regression(train_x, c_train_y,
                               test_x, c_test_y, "orbits")
+elapsed_time = time.time() - start_time
+print("------------------------------------")
+print(elapsed_time, " seconds to complete the task")

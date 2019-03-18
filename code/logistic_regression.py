@@ -7,6 +7,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_auc_score
 import dataloader
 import numpy as np
+import time
 
 
 def train(X, Y):
@@ -73,7 +74,7 @@ def data_set_by_logistic_regression(table_trainX, table_trainY, table_testX, tab
     plt.ylabel('Real')
     plt.show()
 
-
+start_time = time.time()
 print("*********Logistic Regression**********")
 fifa_dataset, finance_dataset, orbits_dataset = dataloader.load_data()
 print("-----------------fifa-----------------")
@@ -90,3 +91,6 @@ print("-----------------orbits---------------")
 train_x, test_x, c_train_y, c_test_y, _, _ = dataloader.dataset_to_table(orbits_dataset)
 data_set_by_logistic_regression(train_x, c_train_y,
                                 test_x, c_test_y, "orbits")
+print("------------------------------------")
+elapsed_time = time.time() - start_time
+print(elapsed_time, " seconds to complete the task")
