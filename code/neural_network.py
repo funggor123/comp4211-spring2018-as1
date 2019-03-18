@@ -2,6 +2,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import GridSearchCV
+import pandas as pd
 import numpy as np
 import dataloader
 

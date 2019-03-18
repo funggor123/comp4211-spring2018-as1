@@ -4,7 +4,7 @@ data_set_path = "./dataset/"
 data_set_1_name = "fifa.npz"
 data_set_2_name = "finance.npz"
 data_set_3_name = "orbits.npz"
-show_data = False
+show_data = True
 
 
 def load_data():

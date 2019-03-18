@@ -23,9 +23,10 @@ def data_set_by_linear_regression(table_trainX, table_trainY, table_testX, table
     print("Sum of Squared Error of test set : ", msq_test * table_testX.shape[0])
 
     sq_for_test = (reg.predict(table_testX) - table_testY) ** 2
-    '''
-    print("Square Error of each data point for test set : ", sq_for_test)
-    '''
+
+    print("Mean Square Error of each data point for test set : ", msq_train)
+    print("Mean Square Error of each data point for test set : ", msq_test)
+
     plt.hist(sq_for_test, bins=50)
     plt.xlabel('Square Error')
     plt.title('Square Error Histogram for test set of ' + name_classifier + ' linear regression')
