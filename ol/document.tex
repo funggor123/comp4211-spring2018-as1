@@ -1,0 +1,69 @@
+\documentclass{article}
+
+% if you need to pass options to natbib, use, e.g.:
+% \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading nips_2017
+%
+% to avoid loading the natbib package, add option nonatbib:
+% \usepackage[nonatbib]{nips_2017}
+
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+% \usepackage[final]{nips_2017}
+
+\usepackage[final]{nips_2018}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+
+\title{COMP4901I Assignment 1 Twitter Sentiment Analysis For Sentence-Level Text}
+
+\author{%
+	Cheng Chi Fung \\
+	\texttt{cfchengac@connect.ust.hk} \\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  In this assignment, we used supervising learning to train an Artificial Intelligence to perform sentiment analysis for sentence-level text. We used logistic regression to estimate the probability that de-scribes the likelihood of a positve sentence. Since its accuracy was not good enough. We performed serveral data pre-processing procedures such as Bi-gram and SGD with momentum to further improve its convergence.
+  
+\end{abstract}
+
+\section{Logistic Regression}
+
+\subsection{Gradient of the formula}
+
+For logistic regression, the gradient formula that we had used was the follows.
+
+$\frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^m (a^{(i)}-y^{(i)})$
+
+$\frac{\partial J}{\partial w} = \frac{1}{m}X(A-Y)^T$
+
+where,
+
+$A = sigmoid(w^T X + b) = (a^{(0)}, a^{(1)}, ..., a^{(m-1)}, a^{(m)})$,
+
+$X$ is the inputs matrx of the data, 
+
+$Y$ is the labels matrix of the data,
+
+$y^{(i)}$ is the label for data i,
+
+$w$ is the weights matrix,
+ 
+$b$ is the bias matrix,  
+ 
+$m$ is the size of the data
+
+\end{document}
+
