@@ -23,7 +23,7 @@
 \usepackage{microtype}      % microtypography
 \usepackage{graphicx}
 
-\title{COMP4901I Assignment 1 Twitter Sentiment Analysis For Sentence-Level Text}
+\title{COMP 4211 - Machine Learning Programming Assignment 1 Report}
 
 \author{%
 	Cheng Chi Fung \\
@@ -35,35 +35,117 @@
 \maketitle
 
 \begin{abstract}
-  In this assignment, we used supervising learning to train an Artificial Intelligence to perform sentiment analysis for sentence-level text. We used logistic regression to estimate the probability that de-scribes the likelihood of a positve sentence. Since its accuracy was not good enough. We performed serveral data pre-processing procedures such as Bi-gram and SGD with momentum to further improve its convergence.
+  In this assignment, we used linear regression, logistic regression and single layer neural network to perform the regression and classification on three binary classification and regression data sets.
   
 \end{abstract}
 
+\section{Linear Regression}
+
+\subsection{Experienment Model Settings}
+
+For linear regression, we used the built-in models   \textbf{LinearRegression} in skitlearn to perform the linear regression on three regression datasets .This model fits a linear model with coefficients  	$w = (w_1,..., w_p)$  to minimize the residual sum of squares between the observed responses in the dataset, and the responses predicted by the linear approximation. This model has \textbf{no hyperparameter} to set.
+
+\begin{table}[htb]
+	\caption{Experiments Datasets Settings}
+	\label{sample-table}
+	\centering
+	\begin{tabular}{lll}
+		\toprule
+		\cmidrule{1-3}
+		Dataset & Training set & Test set \\
+		\midrule
+		Fifa & $13191$ & $4397$ \\
+		Finance & $2754$ & $918$ \\
+		Orbits & $9642$ & $3215$ \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{Experiment Results}
+
+The following are the experiment results which using the above model setting on fifa, finanace and orbits regression datasets.
+
+\begin{table}[htb]
+	\caption{Experiments Results of Linear Regression on three Regression Datasets}
+	\label{sample-table}
+	\centering
+	\begin{tabular}{lll}
+		\toprule
+		\cmidrule{1-3}
+		\multicolumn{3}{c}{Sum of Squared Error (Mean)}\\
+		\midrule
+		Dataset & Training set & Test set \\
+		\midrule
+		Fifa & $1583.01911$ ($0.12000$) & $535.36126$ ($0.12175$) \\
+		Finance & $394.91758$ ($0.14339$) & $163.38803$ ($0.17798$) \\
+		Orbits & $917.91272$ ($0.09519$) & $311.47817$ ($0.09688$)  \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+From the experiment results, we found out that excepts the \textbf{finance} datasets, the mean squared error of the training set and test set are almost the same. And, for the finance datasets, the mean squared error of the test set (0.17798) are a much higher than the training set (0.14339). It means that this model may \textbf{overrfit} the training data of the finance datasets.
+
 \section{Logistic Regression}
 
-\subsection{Gradient of the formula}
+\subsection{Experienmental Model Settings}
 
-For logistic regression, the gradient formula that we had used was the follows.
+To perform the logistic regression with gradient-descent algorithm by minimizing the cross-entropy loss on the three classification datasets,  we used the built-in model \textbf{SGDClassifier} in skitlearn. This model implements regularized linear models with \textbf{stochastic gradient descent} (SGD) learning. 
 
-$\frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^m (a^{(i)}-y^{(i)})$
+\pagebreak
 
-$\frac{\partial J}{\partial w} = \frac{1}{m}X(A-Y)^T$
+To get better training results, we performed the \textbf{hyperparameters tunning} by using \textbf{GridSearchCV} in skitlearn to obtain best hyperparameters parameters for each datasets. The following are the settings of parameters tuning.
 
-where,
+\begin{table}[htb]
+	\caption{Parameters Tuning Settings (Tuned hyperparameters *)}
+	\label{sample-table}
+	\centering
+	\begin{tabular}{lll}
+		\toprule
+		\cmidrule{1-2}
+		Name     &  Parameter Setttings	\\
+		\midrule
+		max\_iter 		  & 	$5000$  \\
+		tol      	          & 	  $0.000000001$        \\
+		learning\_rate* 		  & 	$0.1, 0.01,  0.001$    \\
+		number of cross folds		  &   $5$     \\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
-$A = sigmoid(w^T X + b) = (a^{(0)}, a^{(1)}, ..., a^{(m-1)}, a^{(m)})$,
+\begin{table}[htb]
+	\caption{The results of the Hyperparameters Tuning}
+	\label{sample-table}
+	\centering
+	\begin{tabular}{lll}
+		\toprule
+		\cmidrule{1-2}
+		Name     &  Parameter Setttings	\\
+		\midrule
+		max\_iter 		  & 	$5000$  \\
+		tol      	          & 	  $0.000000001$        \\
+		learning\_rate* 		  & 	$0.1, 0.01,  0.001$    \\
+		number of cross folds		  &   $5$     \\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
-$X$ is the inputs matrx of the data, 
 
-$Y$ is the labels matrix of the data,
 
-$y^{(i)}$ is the label for data i,
+\subsection{Experiment Results}
 
-$w$ is the weights matrix,
- 
-$b$ is the bias matrix,  
- 
-$m$ is the size of the data
+The following are the experiment results which using the above model setting on fifa, finanace and orbits classification datasets.
+
+
+
+\section{Sinlge Layer Neural Network}
+
+\subsection{Experienmental Model Settings}
+
+To perform the logistic regression with gradient-descent algorithm by minimizing the cross-entropy loss on the three classification datasets,  we used the built-in model \textbf{SGDClassifier} in skitlearn. This model implements regularized linear models with \textbf{stochastic gradient descent} (SGD) learning. 
+
+\subsection{Experienment Results}
+
+
 
 \end{document}
 
